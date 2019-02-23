@@ -9,23 +9,36 @@
 # so the returned list should have 10 entries!
 import os
 
-DATADIR = ""
-DATAFILE = "beatles-diskography.csv"
+DATADIR = "files"
+DATAFILE = "beatles-discography.csv"
 
 
 def parse_file(datafile):
     data = []
-    with open(datafile, "r") as f:
+    with open(datafile, "r") as fp:
+        header = fp.readline().split(",")
+
         n = 0
-        for line in f:
-            if n == 0:
+        for line in fp:
+            if n >= 10:
+                break
+
+            output_dict = {}
+            for label, item in zip(header, line.split(",")):
+                output_dict[label.strip()] = item.strip()
+
+            # print(output_dict)
+            data.append(output_dict)
+
+            n += 1
+
+
 
     return data
 
 
-def test():
+def test(datafile):
     # a simple test of your implemetation
-    datafile = os.path.join(DATADIR, DATAFILE)
     d = parse_file(datafile)
     firstline = {'Title': 'Please Please Me', 'UK Chart Position': '1', 'Label': 'Parlophone(UK)',
                  'Released': '22 March 1963', 'US Chart Position': '-', 'RIAA Certification': 'Platinum',
@@ -33,8 +46,14 @@ def test():
     tenthline = {'Title': '', 'UK Chart Position': '1', 'Label': 'Parlophone(UK)', 'Released': '10 July 1964',
                  'US Chart Position': '-', 'RIAA Certification': '', 'BPI Certification': 'Gold'}
 
-    assert d[0] == firstline
-    assert d[9] == tenthline
+    try:
+        assert d[0] == firstline
+        assert d[9] == tenthline
+        print("Success!!!")
+    except AssertionError:
+        print("Not Good...")
 
+if __name__ == "__main__":
+    full_path = (os.path.join(DATADIR, DATAFILE))
 
-parse_file(DATAFILE)
+    test(full_path)
