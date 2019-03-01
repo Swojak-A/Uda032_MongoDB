@@ -21,5 +21,9 @@ def get_db():
 if __name__ == "__main__":
     # For local use
     db = get_db() # uncomment this line if you want to run this locally
+
+    # uncomment to add data to db
     # add_city(db)
+
+    # uncomment to retrieve data
     print(get_city(db))
