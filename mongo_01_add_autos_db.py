@@ -24,10 +24,11 @@ if __name__ == "__main__":
     db = client.examples
 
     # uncomment to insert data
-    # insert_autos('autos-small.csv', db)
+    if db.autos.count() == 0:
+        insert_autos('autos-small.csv', db)
 
     # uncomment to check for data
-    query = db.autos.find({"manufacturer" : "Mazda"})
-    for e in query:
-        pprint(e)
-
+    # query = db.autos.find({"manufacturer" : "Mazda"})
+    # for e in query:
+    #     pprint(e)
+    print("Number of items in collection = {}".format(db.autos.count()))
