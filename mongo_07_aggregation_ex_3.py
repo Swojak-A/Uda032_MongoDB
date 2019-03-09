@@ -14,8 +14,8 @@ def single_result():
 
     return result
 
-def ff_ratio():
-    """ return an object showing fallowers to friends ratio """
+def most_mentions():
+    """ returns an object showing most mentions """
     result = db.twitter.aggregate([
         {"$unwind" : "$entities.user_mentions"},
         {"$group" : {"_id" : "$user.screen_name",
@@ -33,6 +33,6 @@ if __name__ == '__main__':
     # pprint(single_result)
     # print("")
 
-    aggregated_result = ff_ratio()
+    aggregated_result = most_mentions()
     print("Aggregated result:")
     pprint(list(aggregated_result))
