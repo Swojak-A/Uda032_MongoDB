@@ -17,7 +17,7 @@ def single_result():
     return result
 
 def ff_ratio():
-    """ return an object showing fallowers to friends ratio """
+    """ returns an object showing fallowers to friends ratio """
     result = db.twitter.aggregate([
         {"$match" : {"user.followers_count" : {"$gt" : 0},
                     "user.friends_count" : {"$gt" : 0}}},
