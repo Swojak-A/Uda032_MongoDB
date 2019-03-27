@@ -2,6 +2,7 @@
 .venv/
 venv/
 __pycache__/
+files/zip/
 
 # test file
 test.py
